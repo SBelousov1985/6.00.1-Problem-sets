@@ -242,7 +242,7 @@ def playHand(hand, wordList, n):
             total_score += score
             print(current_score.format(word, score, total_score))
             hand_copy = updateHand(hand_copy, word)
-    print("Goodbye! Total score:", total_score, "points.")
+    print("Run out of letters. Total score:", total_score, "points.")
 
 
 #
@@ -266,15 +266,13 @@ def playGame(wordList):
         command = input("Enter n to deal a new hand, "\
                         + "r to replay the last hand, "\
                         + "or e to end game: ")
-        if command == "n":
-            hand = dealHand(HAND_SIZE)
+        if command == "n" or command == "r" and hand != None:
+            if command == "n":
+                hand = dealHand(HAND_SIZE)
             playHand(hand, wordList, HAND_SIZE)
-        elif command == "r":
-            if hand != None:
-                playHand(hand, wordList, HAND_SIZE)
-            else:
-                print("You have not played a hand yet.",
-                      "Please play a new hand first!")
+        elif command == "r" and hand == None:
+            print("You have not played a hand yet.",
+                  "Please play a new hand first!")
         elif command == "e":
             break
         else:
