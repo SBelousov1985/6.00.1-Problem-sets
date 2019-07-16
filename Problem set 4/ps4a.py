@@ -227,21 +227,22 @@ def playHand(hand, wordList, n):
     total_score = 0
     question = 'Enter word, or a "." to indicate that you are finished: '
     current_score = '"{}" earned {} points. Total: {} points'
+    hand_copy = hand.copy()
         
-    while calculateHandlen(hand) > 0:
+    while calculateHandlen(hand_copy) > 0:
         print('Current Hand:', end = " ")
-        displayHand(hand)
+        displayHand(hand_copy)
         word = input(question).lower()
         if word == ".":
             break
-        if not isValidWord(word, hand, wordList):
+        if not isValidWord(word, hand_copy, wordList):
             print("Invalid word, please try again.")
         else:
             score = getWordScore(word, n)
             total_score += score
             print(current_score.format(word, score, total_score))
-            hand = updateHand(hand, word)
-    print("Total score:", total_score, "points.")
+            hand_copy = updateHand(hand_copy, word)
+    print("Goodbye! Total score:", total_score, "points.")
 
 
 #
@@ -260,8 +261,25 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    # TO DO ... <-- Remove this comment when you code this function
-    print("playGame not yet implemented.") # <-- Remove this line when you code the function
+    hand = None
+    while True:
+        command = input("Enter n to deal a new hand, "\
+                        + "r to replay the last hand, "\
+                        + "or e to end game: ")
+        if command == "n":
+            hand = dealHand(HAND_SIZE)
+            playHand(hand, wordList, HAND_SIZE)
+        elif command == "r":
+            if hand != None:
+                playHand(hand, wordList, HAND_SIZE)
+            else:
+                print("You have not played a hand yet.",
+                      "Please play a new hand first!")
+        elif command == "e":
+            break
+        else:
+            print("Invalid command.")
+    
    
 
 
@@ -272,5 +290,3 @@ def playGame(wordList):
 if __name__ == '__main__':
     wordList = loadWords()
     playGame(wordList)
-
-    playHand({'n':1, 'e':1, 't':1, 'a':1, 'r':1, 'i':2}, wordList, 7)
