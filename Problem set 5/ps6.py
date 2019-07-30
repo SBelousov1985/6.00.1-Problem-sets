@@ -248,14 +248,13 @@ def decrypt_story():
 
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
-#print('Expected Output: jgnnq')
-#print('Actual Output:', plaintext.get_message_text_encrypted())
-#    
-##Example test case (CiphertextMessage)
-##ciphertext = CiphertextMessage('jgnnq')
-#ciphertext = CiphertextMessage('hello')
-#print('Expected Output:', (24, 'hello'))
-#print('Actual Output:', ciphertext.decrypt_message())
-#test = Message('abc, .! xyZ')
-#print(test.apply_shift(3))
+print('Expected Output: jgnnq')
+print('Actual Output:', plaintext.get_message_text_encrypted())
+    
+#Example test case (CiphertextMessage)
+#ciphertext = CiphertextMessage('jgnnq')
+ciphertext = CiphertextMessage('hello')
+print('Expected Output:', (24, 'hello'))
+print('Actual Output:', ciphertext.decrypt_message())
+
 print(decrypt_story())
